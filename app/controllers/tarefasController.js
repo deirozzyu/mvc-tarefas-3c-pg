@@ -1,4 +1,4 @@
-// Controlador de Tarefas
+
 // Este arquivo pode ser usado para centralizar lógica de negócio
 const { tarefasModel } = require("../models/tarefasModel");
 
