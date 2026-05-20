@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefas Escondidas</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+   <h1>Tarefas Escondidas</h1>
+
+    <button onclick="window.location='/'">Voltar</button>
+
+    <br>
+    <br>
+
+   <table>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Tarefa</th>
+            <th>Prazo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+<% if(linhasTabela){
+    linhasTabela.forEach((item)=>{
+    %>
+        <tr>
+            <td><%= item.id_tarefa %></td>
+            <td><%= item.nome_tarefa %></td>
+            <td><%= moment(item.prazo_tarefa).format('L') %></td>       
+            <td>
+                <button onclick="window.location='/alterar?id=<%= item.id_tarefa %>'">Editar</button>
+                <button onclick="if(confirm('Deletar permanentemente?')) window.location='/deletar/<%= item.id_tarefa %>'">Deletar</button>
+            </td>       
+        </tr>
+    <% 
+        });
+        } else { %>
+        <tr>
+            <td colspan="4">Nenhuma tarefa escondida</td>
+        </tr>    
+    <% } %>    
+    </tbody>
+   </table>
+
+   <%
+        if(notificador){
+            %>
+            <nav>
+                <ul>
+                <%
+                for(var i = 1; i<= notificador.totalPaginas; i++){
+                        if(i == notificador.paginaAtual){
+                            %>
+                            <li> <a class="atual" href="?pagina=<%= i%>"><%= i%></a></li>
+                            <%        
+                        }else{
+                            %>
+                            <li> <a href="?pagina=<%= i%>"><%= i%></a></li>
+                            <%        
+                        }
+                }
+                %>
+                </ul>
+            </nav>    
+
+            <%  
+        }
+
+    %>
+
+</body>
+</html>
